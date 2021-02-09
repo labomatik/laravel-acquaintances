@@ -54,13 +54,17 @@ trait CanRate
      *
      * @throws \Exception
      */
-    public function rate($targets, float $amount, $ratingType = null, $class = __CLASS__): array
+    public function rate($targets, float $amount, $ratingType = null, $comment = null, $comment_user_label = null, $user_avatar = null, $g_id = null, $class = __CLASS__): array
     {
         Event::dispatch('acq.ratings.rate', [$this, $targets]);
 
         return Interaction::attachRelations($this, 'ratings', $targets, $class, [
             'relation_value' => $amount,
             'relation_type' => $this->rateType($ratingType),
+            'comment' => $comment,
+            'comment_user_label' => $comment_user_label,
+            'comment_user_avatar' => $user_avatar,
+            'comment_g_id' => $g_id
         ]);
     }
 
@@ -95,11 +99,14 @@ trait CanRate
      *
      * @throws \Exception
      */
-    public function toggleRate($targets, float $amount, $ratingType = null, $class = __CLASS__)
+    public function toggleRate($targets, float $amount, $ratingType = null, $comment = null, $comment_user_label = null, $user_avatar = null, $class = __CLASS__)
     {
         return Interaction::toggleRelations($this, 'ratings', $targets, $class, [
             'relation_value' => $amount,
             'relation_type' => $this->rateType($ratingType),
+            'comment' => $comment,
+            'comment_user_label' => $comment_user_label,
+            'comment_user_avatar' => $user_avatar,
         ]);
     }
 
