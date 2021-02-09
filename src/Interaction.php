@@ -24,7 +24,11 @@ class Interaction
         'relation',
         'relation_value',
         'relation_type',
-        'created_at'
+        'created_at',
+        'comment',
+        'comment_user_label',
+        'comment_user_avatar',
+        'comment_g_id'
     ];
 
     /**
